@@ -1,27 +1,33 @@
-# Todo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+# Full stack app with Angular and SpringBoot
 
-## Development server
+----
+( Udemy Course link that I used ) [https://github.com/in28minutes/full-stack-with-angular-and-spring-boot]
+----
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+----
 
-## Code scaffolding
+## Angular Part 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**``angular.json``** 
 
-## Build
+``angular.json`` is application level configuration. <br>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**``package.json``** 
 
-## Running unit tests
+ ``package.json``  is library installed configuration. So all the packages specified in ``package.json`` are downloded when you run ``npm install``. Cosider it as maven dependency management. <br>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+ **``src/environment``**
 
-## Running end-to-end tests
+ All the configuration related to different environment go into this folder. Example dev, production, local, QA, test etc. <br>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+ **``tsconfig.json``**
 
-## Further help
+ As browser run javascript so typescript must be converted into javascript which is specified as part of ``tsconfig.json`` <br>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ **``node_modules``** 
+ 
+ All the packages and libraries are downloaded here.
+
+
+

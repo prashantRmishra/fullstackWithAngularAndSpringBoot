@@ -10,6 +10,10 @@ export class LoginComponent implements OnInit {
   username = 'prashant'
   password =''
   constructor() { }
+  handleLogin(){
+    console.log(this.username)
+
+  }
 
   ngOnInit(): void {
   }

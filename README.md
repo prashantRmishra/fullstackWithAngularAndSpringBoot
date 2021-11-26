@@ -48,8 +48,20 @@
 
  }
  ```
- 
+## Data Bindings
+----
 
+**``Data Interpolation``**
+Syntax : ``Username : {{username}}``
+
+**``Event Binding``**
+Syntax : ``(click) = "handleLogin()"``
+
+**``ngModel``** 
+For two way data binding. Import ``FormsModule`` in ``app.module.ts``
+Syntax : ``[(ngModel)]="username"``
+ 
+----
 
 
 

@@ -6,19 +6,27 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ErrorComponent } from './error/error.component';
+import { ListTodosComponent } from './list-todos/list-todos.component';
 
 @NgModule({
+  //declarations has all the components associated with this module
   declarations: [
     AppComponent,
     WelcomeComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorComponent,
+    ListTodosComponent
   ],
+  //additional inbuilt modules that our components needs are listed in imports
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
   providers: [],
+  //bootstrap tells when appModule is loaded which 
+  //components should be loaded.
   bootstrap: [AppComponent]
 })
 export class AppModule { }

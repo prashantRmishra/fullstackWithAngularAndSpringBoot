@@ -3,9 +3,9 @@
 
 ----
 [ Udemy Course link that I used ](https://github.com/in28minutes/full-stack-with-angular-and-spring-boot)
-----
 
 ----
+
 
 ## Angular Part 
 
@@ -48,6 +48,7 @@
 
  }
  ```
+ 
 ## Data Bindings
 ----
 
@@ -62,6 +63,90 @@ For two way data binding. Import ``FormsModule`` in ``app.module.ts``
 Syntax : ``[(ngModel)]="username"``
  
 ----
+
+**Directives in Angular**
+
+----
+``ngIf``
+Example for toggle of error message
+
+```javascript
+<small *ngIf='invalidLogin'>{{errorMessage}}</small>
+```
+<br>
+
+``ngFor``
+```html
+<tr *ngFor = 'let todo of todos'>
+            <td>{{todo.id}}</td>
+            <td>{{todo.description}}</td>
+        </tr>
+
+```
+
+``ngModel`` 
+For two way data binding. Import ``FormsModule`` in ``app.module.ts``
+Syntax : ``[(ngModel)]="username"``
+
+----
+
+**Routing**
+
+----
+1. Routing from ``app.routing.module.ts``
+```javascript
+const routes: Routes = [
+  {
+    path:'',component:LoginComponent
+  }
+  ```
+  Put only ``router-outlet`` in the ``app.component.html``
+  ```html
+  <router-outlet></router-outlet>
+```
+2. Routing from one component to another component example from ``LoginComponent`` to ``WelcomeComponent``
+
+``import {Router} from '@angular/router'`` in ``LoginComponent`` <br>
+Write following in the ``LoginComponent``
+
+```javascript
+//This is called Dependency Injection 
+  constructor(private router : Router) { }
+
+  handleLogin(){
+    console.log(this.username)
+    this.router.navigate(['welcome'])
+
+  }
+
+```
+Accepting parameters from routing 
+example : accepting ``prashant`` from ``welcome/prashant``
+
+update ``LoginComponent`` as
+
+```javascript
+ this.router.navigate(['welcome',this.username]) //url with parameter
+```
+Add following to your ``WelcomeComponent`` 
+
+```javascript
+  constructor(private router : ActivatedRoute) { } // import from @angular/router
+
+  ngOnInit(): void {
+    console.log(this.router.snapshot.params['user']);
+  }
+
+```
+3. ``routerLink``
+
+```html
+Go to your <a routerLink ="/todos">todo's</a> List.
+```
+It will take you to todos page upon click
+
+----
+
 
 
 

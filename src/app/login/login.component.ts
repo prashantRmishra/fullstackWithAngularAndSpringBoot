@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,14 @@ export class LoginComponent implements OnInit {
 
   username = 'prashant'
   password =''
-  constructor() { }
+
+
+  //This is called Dependency Injection 
+  constructor(private router : Router) { }
+
   handleLogin(){
-    console.log(this.username)
+
+    this.router.navigate(['welcome',this.username])
 
   }
 

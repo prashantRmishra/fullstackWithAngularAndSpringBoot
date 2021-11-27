@@ -6,6 +6,12 @@
 
 ----
 
+Using bootstrap for styling 
+---
+
+Search for 'unpkg bootstrap 4' in browser then go to any of the links and then copy the url of bootstrap.min.css which was in my case 'https://unpkg.com/browse/bootstrap@4.1.0/dist/css/bootstrap.min.css'
+
+import in your ``style.css``. @import url(https://unpkg.com/browse/bootstrap@4.1.0/dist/css/bootstrap.min.css)
 
 ## Angular Part 
 
@@ -48,7 +54,24 @@
 
  }
  ```
- 
+ **Bootstraping in angular**
+ ----
+ If you see ``main.ts`` you will see ``app.module.ts`` getting bootstapped. 
+
+ ```typescript
+
+ platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+
+ ```
+ Then in ``app.module.ts`` ``AppComponent`` is getting bootstrapped.
+ ```typescript
+  bootstrap: [AppComponent]
+ ```
+ So basically once ``AppModule`` is intialized ``AppComponent`` is also intialized.
+ Then finally ``<app-root></app-root>`` mentined in ``index.html`` is rendered as view source from ``app.component.html`` 
+
+ ----
 ## Data Bindings
 ----
 

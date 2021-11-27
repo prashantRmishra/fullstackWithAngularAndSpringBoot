@@ -72,7 +72,9 @@ import in your ``style.css``. @import url(https://unpkg.com/browse/bootstrap@4.1
  Then finally ``<app-root></app-root>`` mentined in ``index.html`` is rendered as view source from ``app.component.html`` 
 
  ----
-## Data Bindings
+
+**Data Bindings**
+
 ----
 
 **``Data Interpolation``**

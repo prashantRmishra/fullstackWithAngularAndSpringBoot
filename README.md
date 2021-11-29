@@ -9,9 +9,19 @@
 Using bootstrap for styling 
 ---
 
-Search for 'unpkg bootstrap 4' in browser then go to any of the links and then copy the url of bootstrap.min.css which was in my case 'https://unpkg.com/browse/bootstrap@4.1.0/dist/css/bootstrap.min.css'
+run ``npm install bootstrap --save``
+Add following to your ``angular.json`` 
 
-import in your ``style.css``. @import url(https://unpkg.com/browse/bootstrap@4.1.0/dist/css/bootstrap.min.css)
+```json
+            "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+```
+Kill your application and do ``ng serve`` again to see the effect of bootstrap classes if you have used any :)
 
 ## Angular Part 
 
@@ -171,6 +181,23 @@ Go to your <a routerLink ="/todos">todo's</a> List.
 It will take you to todos page upon click
 
 ----
+
+Implementing RouteGuard for making sure that all the pages or the links are accesible only when the user has already logged in.
+----
+
+Create Service ``routeGuard`` in service folder and implement an interface called ``CanActivate`` from ``@angular/router``
+
+
+What is called a WebService
+----
+We have to keep in mind three things 
+1. There should be machine to machine communication 
+2. The communication should be plateform independent
+3. The service should be available over the internet.
+
+Tips!
+---
+1. Use ``routerLink`` instead of ``href`` as ``href`` always reloads the page, angular is used to develop single page application. So, it is good to use ``routerLink`` as it will avoid reload of the page.
 
 
 

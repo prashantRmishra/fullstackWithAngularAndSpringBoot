@@ -1,7 +1,12 @@
+<h1>Login !</h1>
+<div class="alert alert-warning" *ngIf='!validCredentials'>{{errorMessage}}</div>
+<div class="container">
+ 
+      <form [formGroup]="todo">
+        Name : <input type="text" name="username" formControlName="username">
+        Password : <input type="password" formControlName="password" name="password">
+        <!-- Username : {{username}} -->
+        <button (click) = "handleLogin()" [disabled]="!todo.valid" class="btn btn-success">Login</button>
+      </form>
 
-<div>
-    Name : <input type="text" name="username" [(ngModel)]="username" >
-    Password : <input type="password" name="password">
-    <!-- Username : {{username}} -->
-    <button (click) = "handleLogin()" >Login</button>
 </div>

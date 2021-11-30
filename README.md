@@ -187,6 +187,76 @@ Implementing RouteGuard for making sure that all the pages or the links are acce
 
 Create Service ``routeGuard`` in service folder and implement an interface called ``CanActivate`` from ``@angular/router``
 
+Then implement ``canActivate`` method and write your logic to check if the user has logged in or not.
+
+For example I have created ``isUserLogggedIn()`` menthod in ``HardCodedAuthenticationService.ts`` service to check if user has logged in or not.
+For that I have used ``sessionStorage`` to store ``username`` once the user has logged in.
+
+```typescript
+ isUserLoggedIn(){
+    let user =sessionStorage.getItem('username')
+    return !(user===null)
+  }
+```
+
+**Note** : ``sessionStorage.setItem('username',username)`` is done during login of the user. Refer ``hardcode-authentication-service.ts`` and ``login-component.ts`` files for more information.
+
+``route-guard-service.ts``
+
+```javascript
+
+ canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+   
+   if(this.hardcodedAuthentication.isUserLoggedIn())
+    return true
+    this.router.navigate(['login'])
+    return false
+  }
+```
+Once this is done we can guard all the routes from the ``app-routing.module``
+
+```typescript
+const routes: Routes = [
+  {
+    path:'',component:LoginComponent
+  },
+  {
+    path:'login',component:LoginComponent
+  },
+  {
+    path:'welcome/:user',component:WelcomeComponent,canActivate:[RouteGuardService]
+  },
+  {
+    path:'todos',component:ListTodosComponent,canActivate:[RouteGuardService]
+  },
+  {
+    path:'logout',component:LogoutComponent,canActivate:[RouteGuardService]
+  },
+ 
+  //anything else 
+  {
+    path:'**',component:ErrorComponent
+  }
+];
+```
+
+Observable
+---
+It is one of the best way to implement asynchronous http request (because if we don't use asynchronous call then browser will hang till the response comes from the server)
+
+Example in ``welcome-data-service.ts``
+
+``import { Observable } from 'rxjs';``
+
+```javascript
+
+executeWelcomeDataService():Observable<Object>{
+    return this.http.get('http://localhost:8080/hello-world')
+  }
+```
+**Remember** ``Observable`` are not executed untill it is subscribed
+
+
 
 What is called a WebService
 ----
@@ -194,6 +264,15 @@ We have to keep in mind three things
 1. There should be machine to machine communication 
 2. The communication should be plateform independent
 3. The service should be available over the internet.
+
+
+
+CORS
+---
+You will get following error if you request form angular to springboot
+
+Access to XMLHttpRequest at 'http://localhost:8080/hello-world' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+<br>
 
 Tips!
 ---

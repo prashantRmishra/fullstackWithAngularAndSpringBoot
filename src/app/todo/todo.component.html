@@ -1,0 +1,12 @@
+<h1>Todo</h1>
+<div class="container">
+    <fieldset class="form-group">
+        <label for="description">Description</label>
+        <input type="text" [(ngModel)]="todo.description" class="form-control">
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="date">Date</label>
+        <input type="date" [ngModel] = "todo.tagetDate | date : 'yyyy-MM-dd'"
+        (ngModelChange)="todo.tagetDate  = $event" class="form-control">
+    </fieldset>
+</div>

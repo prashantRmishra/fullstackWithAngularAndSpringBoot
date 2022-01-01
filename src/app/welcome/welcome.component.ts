@@ -16,14 +16,18 @@ export class WelcomeComponent implements OnInit {
 
               } // import from @angular/router
   name =''
+  welcomeMessage =''
 
   ngOnInit(): void {
     this.name  = this.router.snapshot.params['user'];
   }
   getWelcomeMessage(){
-   console.log( this.welcomeDataService.executeWelcomeDataService().subscribe(res=>{
-     console.log(res)
-   }))
+  this.welcomeDataService.executeWelcomeDataService().subscribe(res=>{
+     this.welcomeMessage = res.toString()
+   },
+   err=>{
+     console.log(err.error.message);
+   })
   }
 
 }

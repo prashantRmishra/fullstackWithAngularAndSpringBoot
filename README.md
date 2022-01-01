@@ -278,7 +278,29 @@ Tips!
 ---
 1. Use ``routerLink`` instead of ``href`` as ``href`` always reloads the page, angular is used to develop single page application. So, it is good to use ``routerLink`` as it will avoid reload of the page.
 
+2. If you are sending ``json`` values form your backend to angular but the name of the property seems little different from what you have defined in your class file (java in my case). It is because the getProperty() (gettter ) method that you have specified.
+For example if the name of the property is 
+```java
+private boolean isDone;
+public getDone(){  // get done
+  return this.isDone;
+}
+```
+In ``json`` the property will be ``done`` and not ``isDone``. This is because of the getter method has name as ``getDone()`` not ``getIsDone()``.
+For better understanding you can refer to ``Todo.java`` fie in the backend project and ``list-todos-components.ts`` in angular app.
 
+<br>
 
+3.  ``[(ngModel)]`` we know that it is used for two way data binding , it can also be written as 
+ 
+ ```javascript
+  <input type="date" [ngModel] = "todo.tagetDate | date : 'yyyy-MM-dd'"
+        (ngModelChange)="todo.tagetDate  = $event" class="form-control">
+ ```
+Which is same as writing 
 
+```javascript
+ <input type="date" [(ngModel)] = "todo.tagetDate" class="form-control">
+ <!--pipes don't work with [(ngModel)] hence it is split as shown in the above statement-->
+```
 

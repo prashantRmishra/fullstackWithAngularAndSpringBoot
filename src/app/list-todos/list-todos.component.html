@@ -1,5 +1,6 @@
 
 <h1>List of things I want to do !</h1>
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
 <div class="container">
     <table class="table table-bordered">
         <thead>
@@ -8,14 +9,19 @@
                 <th>Description</th>
                 <th>Date</th>
                 <th>is Done ?</th>
+                <th>Update</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor = 'let todo of todos'>
                 <td>{{todo.id}}</td>
                 <td>{{todo.description}}</td>
-                <td>{{todo.targetDate | date}}</td>
-                <td>{{todo.done}}</td>
+                <td>{{todo.tagetDate | date}}</td>
+                <td>{{todo.isDone}}</td>
+                <td><button class="btn btn-success" (click)="updateTodoById(todo.id)">Update</button></td>
+                <td><button class = "btn btn-warning" (click)="deleteTodo(todo.id)">Delete</button></td>
+
             </tr>
         </tbody>
     </table>

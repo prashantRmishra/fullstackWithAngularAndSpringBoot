@@ -37,4 +37,15 @@ public class HardCodedTodoService {
 		}
 		return null;
 	}
+	public Todo save(Todo todo) {
+		if(todo.getId()==-1 || todo.getId()==0) { //-1 means save operation
+			todo.setId(++toDoCounter);
+			list.add(todo);
+		}
+		else {
+			deleteTodoById(todo.getId());
+			list.add(todo);
+		}
+		return todo;
+	}
 }

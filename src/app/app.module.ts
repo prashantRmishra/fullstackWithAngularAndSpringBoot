@@ -11,8 +11,9 @@ import { ListTodosComponent } from './list-todos/list-todos.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TodoComponent } from './todo/todo.component';
+import { HtttpInterceptorBasicAuthService } from './service/http/htttp-interceptor-basic-auth.service';
 
 @NgModule({
   //declarations has all the components associated with this module
@@ -35,7 +36,11 @@ import { TodoComponent } from './todo/todo.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,useClass: HtttpInterceptorBasicAuthService,multi: true
+    }
+  ],
   //bootstrap tells when appModule is loaded which 
   //components should be loaded.
   bootstrap: [AppComponent]

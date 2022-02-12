@@ -182,6 +182,30 @@ It will take you to todos page upon click
 
 ----
 
+**Validation in angular**
+
+1. Using ``ngSubmit`` event.
+
+```html
+ <form (ngSubmit)=" !todoForm.invalid &&  updateTodoDetails()" #todoForm="ngForm"> <!--#todoForm is the name of the ngForm template-->
+ <!--.invalid is the built in function of angular to check validity of the form-->
+    <fieldset class="form-group">
+        <label for="description">Description</label>
+        <input type="text" [(ngModel)]="todo.description" name="description" class="form-control" required="required">
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="date">Date</label>
+        <input type="date" [ngModel] = "todo.tagetDate | date : 'yyyy-MM-dd'" name="tagetDate"
+        (ngModelChange)="todo.tagetDate  = $event" class="form-control" required="required">
+    </fieldset>
+
+        <button class="btn btn-success" type="submit">Save</button>
+</form>
+```
+2. Using ``FormBuilder``
+
+Refer ``login-component.ts`` and ``login-component.html``.
+
 Implementing RouteGuard for making sure that all the pages or the links are accesible only when the user has already logged in.
 ----
 
@@ -271,14 +295,87 @@ CORS
 ---
 You will get following error if you request form angular to springboot
 
-Access to XMLHttpRequest at 'http://localhost:8080/hello-world' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+`Access to XMLHttpRequest at 'http://localhost:8080/hello-world' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.`
 <br>
+Resolve the above error you will have to add `@crossOrigin` to the controller method where the requests are getting attached.
+
+But if you have incorporated ``SpringSecurity` in your app in the backend then you will get error which is slightly different 
+
+`Access to XMLHttpRequest at 'http://localhost:8080/hello-world' from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.`
+
+To resolve this you will have to provide header in you request that 
+will have username and password that you have created in your `application.properties` file in Spring boot.
+
+Following changes are needed in the agnular app
+`welcome-data-service.ts` 
+
+```typeScript
+executeWelcomeDataService():Observable<Object>{
+  let header = new HttpHeaders({
+    Authorization:this.generateAuthenticationHttpHeader()
+  })
+    return this.http.get('http://localhost:8080/hello-world',{responseType:'text',headers:header})
+  }
+
+  constructor(private http:HttpClient) { }
+
+
+  generateAuthenticationHttpHeader(){
+    let username  = 'prashant';
+    let password = 'prashant';
+    let authentication = 'Basic'+' '+window.btoa(username+':'+password); //btoa is used for base 64 encoding in javascript
+    return authentication;
+  }
+```
+_You will have the replicate the same above changes in all the requesting services in your frontend application._
+
+**But if we do that manually it would be hectic task as for every new sevice that we create we will have to add this header in that 
+we don't want that hence instead we will use** `HttpInterceptor`.
+
+Create a service `HttpInterceptorBasicAuthService` and `implement` `HttpInterceptor` 
+
+
+```TypeScript
+// HttpInterceptor acts as filter 
+export class HtttpInterceptorBasicAuthService  implements HttpInterceptor{
+
+  constructor() { }
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let username  = 'prashant';
+    let password = 'prashant';
+    let authentication = 'Basic'+' '+window.btoa(username+':'+password); //btoa is used for base 64 encoding in javascript
+   // as this request is nothing but httpRequest that is sent out, we will add our header in request 
+    request = request.clone({
+        setHeaders: {
+          Authorization: authentication
+        }
+      }); // we can not modify the request object hence we will clone it and then add our request header into it.
+      // next.handle() will send the request to the next HttpRequest handler
+      return next.handle(request);
+    //throw new Error('Method not implemented.');
+  }
+```
+
+We will have to configure the Interceptor in ``app.module.ts`` `providers[]` to make it work properly
+--
+```TypeScript
+
+ providers: [
+    {
+      provide: HTTP_INTERCEPTORS,useClass: HtttpInterceptorBasicAuthService,multi: true
+    }
+  ],
+
+```
+
+____
+And the changes that you need to do in your Spring boot app in mentioned in `README.md` file of Spring boot app.
 
 Tips!
 ---
 1. Use ``routerLink`` instead of ``href`` as ``href`` always reloads the page, angular is used to develop single page application. So, it is good to use ``routerLink`` as it will avoid reload of the page.
 
-2. If you are sending ``json`` values form your backend to angular but the name of the property seems little different from what you have defined in your class file (java in my case). It is because the getProperty() (gettter ) method that you have specified.
+2. If you are sending ``json`` values form your backend to angular but the name of the property seems little different from what you have defined in your class file (java in my case). It is because the getProperty() (getter ) method that you have specified.
 For example if the name of the property is 
 ```java
 private boolean isDone;

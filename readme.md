@@ -22,7 +22,7 @@ Fine tuning changes that you can add to your code
 Springboot validation
 --
 
-[How to use validation in your application](/restful-webservices/validationReadme.md)
+[How to use validation in your application](validationReadme.md)
 
 Spring Boot Hateos
 --

@@ -1,5 +1,37 @@
+## Key terminologies used in Spring boot Application.
+
+`Dispatcher Servlet`
+--
+if you set the `logging.level.org.springframework=debug` in your `application.properties` you will see a lot of things being configured.
+
+In that you will also see DispatcherServlet being configured as it was found on the class path.
+
+```
+DispatcherServletAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.web.servlet.DispatcherServlet' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+      
+```
+
+`DispatcherServlet` is the front controller for the Spring MVC framework. So request first goes to the `DispatcherServlet` [/].
+
+And `DispatcherServlet` knows all the mapping in the application that you might have created in the controller class along with some pre-defined mappings like `/error`.
+
+Fine tuning changes that you can add to your code
+
+Springboot validation
+--
+
+[How to use validation in your application](/restful-webservices/validationReadme.md)
+
+Spring Boot Hateos
+--
+
+[User HATEOS to get URL of the created resource](https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/8005652#overview)
+
 Tips
 ---
+
 1. If we are not using ``ResponseEntity<>`` in return type of our controller methods then the default return status is success.
 Hence in the ``@GetMapping`` of ``getToDoList()`` method you can see we have not specified the ``ResponseEntity`` as the default return status is ``200`` which is success. 
 <br>
@@ -84,9 +116,10 @@ public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerA
 		// enable hence we will .disable() it as will not be using csrf tokens but we will be using jwt token.
 		authorizeRequests().
 		antMatchers(HttpMethod.OPTIONS,"/**").permitAll().	// this will allow any url of option type to be Processed instead of blocking it.
-        anyRequest().authenticated()
-        .and().
-        httpBasic(); // and rest of the methods that is post,put,delete and get need to be authenticated using http basic authentication.
+        	anyRequest().
+        	authenticated().
+        	and().
+        	httpBasic(); // and rest of the methods that is post,put,delete and get need to be authenticated using http basic authentication.
 	}
 }
 

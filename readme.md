@@ -27,7 +27,36 @@ Springboot validation
 Spring Boot Hateos
 --
 
-[User HATEOS to get URL of the created resource](https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/8005652#overview)
+[User HATEOS to get URL of the created resource ](https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/8005652#overview)
+
+Internationalization in Spring boot
+-
+[Use Locale for Internationalization](Internationalization.md)
+
+Xml Support In Spring boot
+--
+[Use fasterxml for xml support](XmlSupport.md)
+
+Documentation of Rest Api's
+-
+[User swagger for documentation](swaggerDocumentation.md)
+
+Spring boot actuators
+-
+
+[reference to udemy course](https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/8005670#overview)
+
+Visualize Api's with HAL explorer
+-
+[reference to udemy course](https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/26692956#overview)
+
+Static and Dynamic filtering in Spring boot
+--
+[reference to udemy course ](https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/8005674#overview)
+
+Versioning in Spring boot
+--
+[reference to udemy course](https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/8005680#overview)
 
 Tips
 ---
